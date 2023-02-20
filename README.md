@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<h1>Instruções para executar o Docker Compose</h1>
+	<h1>Instruções para executar o projeto</h1>
 	<ol>
 		<li>Instale o Docker Engine em sua máquina.</li>
 		<li>Clone o repositório Git que contém o arquivo docker-compose.yaml.</li>
