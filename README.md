@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Instruções para executar o Docker Compose</title>
-</head>
 <body>
 	<h1>Instruções para executar o Docker Compose</h1>
 	<ol>
