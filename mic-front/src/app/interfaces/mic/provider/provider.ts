@@ -1,0 +1,20 @@
+export interface Provider {
+  id: number | undefined
+  active: boolean | undefined
+  name: string | undefined
+  document: string | undefined
+  gender: string | undefined
+  birthdate: Date | undefined
+  service_location: string | undefined
+  specialty: string | undefined
+  cellphone_number: string | undefined
+  phone_number: string | undefined
+  marital_status: string | undefined
+  zip_code: string | undefined
+  street: string | undefined
+  number: string | undefined
+  complement: string | undefined
+  neighborhood: string | undefined
+  city: string | undefined
+  state: string | undefined
+}

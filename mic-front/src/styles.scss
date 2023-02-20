@@ -1,0 +1,150 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import "styles/variables";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+
+@import "~bootstrap/scss/utilities"; // Configures the utility classes that should be generated
+@import "~bootstrap/scss/utilities/api"; // Generates the actual utility classes
+
+@import "styles/reset";
+
+html, body {
+  height: 100%;
+  background-color: #f7f9fc;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-drawer-container {
+  background-color: #f7f9fc;
+  color: rgba(0,0,0,.87);
+}
+
+.card-web {
+  width: 100%;
+  margin-left: 40px;
+  margin-right: 40px;
+  padding: 5px;
+}
+
+.card-mobile {
+  width: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 5px;
+}
+
+table {
+  width: 100%;
+}
+
+.dataSource {
+  width: 100%;
+}
+
+.dataSourceTable, .cards {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.asc {
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+}
+
+.mat-drawer-inner-container {
+  width: 100%;
+  height: 100%;
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 50%, rgba(247,249,252,1) 100%);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mat-toolbar.mat-primary {
+  background: rgb(59,74,162);
+  background: linear-gradient(180deg, rgba(59,74,162,1) 50%, rgba(63,81,181,1) 100%);
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .table-action thead {
+    display: none;
+  }
+  .table-action td:not(:first-child) {
+    display: block;
+  }
+}
+
+.th-sortable {
+  cursor: pointer;
+}
+
+.readonly-wrapper {
+  cursor: not-allowed;
+}
+
+.readonly-wrapper .readonly-block {
+  pointer-events: none;
+}
+
+.mat-slide-toggle.mat-disabled {
+  opacity: 1 !important;
+}
+
+.filter-select {
+  height: 50px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.file-uploaded {
+  cursor: pointer;
+}
+
+#divPreview {
+  overflow: auto;
+  display: grid;
+}
+
+mat-slide-toggle {
+  z-index: 0;
+}
+
+.mat-progress-spinner {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-section-title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.container {
+  margin-bottom: 10px;
+}
+
+#btn-salvar, #btn-cancelar {
+  margin: 5px;
+  margin-top: 20px;
+}

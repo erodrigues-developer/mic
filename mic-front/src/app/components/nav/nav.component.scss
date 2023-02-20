@@ -1,0 +1,48 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+mat-icon {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.mat-expansion-panel-spacing {
+  margin: 0 0;
+}
+
+mat-nav-list {
+  padding: 0;
+}
+
+mat-expansion-panel {
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 50%, rgba(247,249,252,1) 100%);
+}
+
+.mat-expansion-panel-header-title, .mat-list-base .mat-list-option {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+// mat-sidenav {
+//   background-image: url("https://sm.ign.com/ign_br/screenshot/default/wakanda-serie-disney_3te9.jpg");
+//   background-size: cover;
+//   background-position-x: 50%;
+//   background-position-y: center;
+//   background-repeat: no-repeat;
+//   border:none;
+// }

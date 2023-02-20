@@ -1,0 +1,65 @@
+<div mat-dialog-content id="divFilter">
+    <mat-checkbox id="check-filtro-nome" [(ngModel)]="filterName"
+      >Filtra por nome</mat-checkbox
+    >
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input
+        id="input-filtro-nome"
+        matInput
+        [(ngModel)]="data.name"
+        disabled="{{ !filterName }}"
+      />
+    </mat-form-field>
+  
+    <mat-checkbox id="check-filtro-documento" [(ngModel)]="filterDocument"
+      >Filtra por documento</mat-checkbox
+    >
+    <mat-form-field appearance="fill">
+      <mat-label>Documento</mat-label>
+      <input
+        id="input-filtro-documento"
+        matInput
+        [(ngModel)]="data.document"
+        disabled="{{ !filterDocument }}"
+        mask="CPF_CNPJ"
+      />
+    </mat-form-field>
+  
+    <mat-checkbox id="check-filtro-especialidade" [(ngModel)]="filterSpecialty"
+      >Filtra por especialidade</mat-checkbox
+    >
+    <mat-form-field appearance="fill">
+      <mat-label>Carteirinha</mat-label>
+      <input
+        id="input-filtro-especialidade"
+        matInput
+        [(ngModel)]="data.specialty"
+        disabled="{{ !filterSpecialty }}"
+      />
+    </mat-form-field>
+  
+    <mat-checkbox id="check-filtro-ativo" [(ngModel)]="filterActive"
+      >Filtra por ativo</mat-checkbox
+    >
+    <mat-slide-toggle
+      id="radio-ativo"
+      [(ngModel)]="data.active"
+      disabled="{{ !filterActive }}"
+      >Está ativo</mat-slide-toggle
+    >
+  </div>
+  <div mat-dialog-actions>
+    <button id="btn-cancelar-filtro" mat-button (click)="onNoClick()">
+      Voltar
+    </button>
+    <button
+      id="btn-salvar-filtro"
+      mat-button
+      [mat-dialog-close]="sendData()"
+      cdkFocusInitial
+    >
+      Filtrar
+    </button>
+  </div>
+  

@@ -1,0 +1,339 @@
+<div class="container app-section-title">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="d-flex justify-content-center">{{ section }}</h2>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <mat-card>
+        <mat-card-subtitle>Dados principais</mat-card-subtitle>
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-md-3 d-flex justify-content-center">
+              <mat-slide-toggle
+                id="radio-ativo"
+                [(ngModel)]="associate.active"
+                disabled="{{ preview }}"
+              >
+                Ativo
+              </mat-slide-toggle>
+            </div>
+
+            <div class="col-12 col-md-9">
+              <mat-form-field appearance="fill">
+                <mat-label>Nome</mat-label>
+                <input
+                  id="input-nome"
+                  [(ngModel)]="associate.name"
+                  [formControl]="name"
+                  type="text"
+                  required
+                  matInput
+                />
+                <mat-error *ngIf="name.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="name.hasError('maxLength')"
+                  >{{ maxLengthMessage }}255</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-3">
+              <mat-form-field appearance="fill">
+                <mat-label>CPF/CNPJ</mat-label>
+                <input
+                  id="input-document"
+                  [(ngModel)]="associate.document"
+                  [formControl]="document"
+                  type="text"
+                  mask="CPF_CNPJ"
+                  required
+                  matInput
+                />
+                <mat-error *ngIf="document.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="document.hasError('cpfNotValid')">{{
+                  cpfNotValidMessage
+                }}</mat-error>
+                <mat-error *ngIf="document.hasError('cnpjNotValid')">{{
+                  cnpjNotValidMessage
+                }}</mat-error>
+                <mat-error *ngIf="document.hasError('maxLength')"
+                  >{{ maxLengthMessage }}200</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-3">
+              <mat-form-field appearance="fill">
+                <mat-label>Número da Carteirinha</mat-label>
+                <input
+                  id="input-card-number"
+                  [(ngModel)]="associate.card_number"
+                  type="text"
+                  matInput
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-3">
+              <mat-form-field appearance="fill">
+                <mat-label>Gênero</mat-label>
+                <mat-select id="input-gender" [(ngModel)]="associate.gender">
+                  <mat-option value="M">Masculino</mat-option>
+                  <mat-option value="F">Feminino</mat-option>
+                  <mat-option value="O">Outros</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-3">
+              <mat-form-field appearance="fill">
+                <mat-label>Data de Nascimento</mat-label>
+                <input
+                  id="input-birthdate"
+                  [(ngModel)]="associate.birthdate"
+                  [formControl]="birthdate"
+                  type="date"
+                  placeholder="dd/mm/yyyy"
+                  matInput
+                  required
+                />
+                <mat-error *ngIf="birthdate.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="birthdate.hasError('maxLength')"
+                  >{{ maxLengthMessage }}255</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-3">
+              <mat-form-field appearance="fill">
+                <mat-label>Celular</mat-label>
+                <input
+                  id="input-cellphone_number"
+                  [(ngModel)]="associate.cellphone_number"
+                  [formControl]="cellphoneNumber"
+                  type="text"
+                  mask="(00) 0 0000-0000"
+                  required
+                  matInput
+                />
+                <mat-error *ngIf="cellphoneNumber.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="cellphoneNumber.hasError('maxLength')"
+                  >{{ maxLengthMessage }}255</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-3">
+              <mat-form-field appearance="fill">
+                <mat-label>Telefone</mat-label>
+                <input
+                  id="input-phone_number"
+                  [(ngModel)]="associate.phone_number"
+                  type="text"
+                  mask="(00) 0 0000-0000"
+                  matInput
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Gênero</mat-label>
+                <mat-select
+                  id="input-marital_status"
+                  [(ngModel)]="associate.marital_status"
+                >
+                  <mat-option value="single">Solteiro(a)</mat-option>
+                  <mat-option value="married">Casado(a)</mat-option>
+                  <mat-option value="divorced">Divorciado(a)</mat-option>
+                  <mat-option value="widowed">Viúvo(a)</mat-option>
+                  <mat-option value="separeted">Separado(a)</mat-option>
+                  <mat-option value="civil_union">União Estável</mat-option>
+                  <mat-option value="domestic_partnership"
+                    >Parceiro(a) Doméstico(a)</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>CEP</mat-label>
+                <input
+                  id="input-zip_code"
+                  [(ngModel)]="associate.zip_code"
+                  [formControl]="zipcode"
+                  type="text"
+                  mask="00.000-000"
+                  maxlength="50"
+                  (focusout)="searchZipCode()"
+                  required
+                  matInput
+                />
+                <mat-error *ngIf="zipcode.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="zipcode.hasError('maxLength')"
+                  >{{ maxLengthMessage }}255</mat-error
+                >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Rua</mat-label>
+                <input
+                  id="input-street"
+                  [(ngModel)]="associate.street"
+                  [formControl]="street"
+                  type="text"
+                  required
+                  matInput
+                />
+                <mat-error *ngIf="street.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="street.hasError('maxLength')"
+                  >{{ maxLengthMessage }}255</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Número</mat-label>
+                <input
+                  id="input-number"
+                  [(ngModel)]="associate.number"
+                  [formControl]="number"
+                  type="text"
+                  required
+                  matInput
+                />
+                <mat-error *ngIf="number.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="number.hasError('maxLength')"
+                  >{{ maxLengthMessage }}255</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Complemento</mat-label>
+                <input
+                  id="input-complement"
+                  [(ngModel)]="associate.complement"
+                  type="text"
+                  matInput
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Bairro</mat-label>
+                <input
+                  id="input-neighborhood"
+                  [(ngModel)]="associate.neighborhood"
+                  [formControl]="neighborhood"
+                  type="text"
+                  required
+                  matInput
+                />
+                <mat-error *ngIf="neighborhood.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="neighborhood.hasError('maxLength')"
+                  >{{ maxLengthMessage }}255</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Cidade</mat-label>
+                <input
+                  id="input-city"
+                  [(ngModel)]="associate.city"
+                  [formControl]="city"
+                  type="text"
+                  required
+                  matInput
+                />
+                <mat-error *ngIf="city.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="city.hasError('maxLength')"
+                  >{{ maxLengthMessage }}255</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Estado</mat-label>
+                <input
+                  id="input-state"
+                  [(ngModel)]="associate.state"
+                  [formControl]="state"
+                  type="text"
+                  required
+                  matInput
+                />
+                <mat-error *ngIf="state.hasError('required')">{{
+                  requiredMessage
+                }}</mat-error>
+                <mat-error *ngIf="state.hasError('maxLength')"
+                  >{{ maxLengthMessage }}255</mat-error
+                >
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <mat-card>
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-sm-12 d-flex justify-content-center"
+              *ngIf="!preview"
+            >
+              <button
+                id="btn-salvar"
+                mat-raised-button
+                color="primary"
+                (click)="save()"
+              >
+                Salvar
+              </button>
+              <button id="btn-cancelar" mat-raised-button (click)="cancel()">
+                Voltar
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<mat-sidenav-container class="sidenav-container" *ngIf="!isLoginPage()">
+  <mat-sidenav
+    id="sidenav-menu-lateral"
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>
+      <mat-icon aria-hidden="false">health_and_safety</mat-icon>
+      <span>MIC</span>
+    </mat-toolbar>
+    <mat-nav-list>
+      <mat-accordion multi>
+        <mat-expansion-panel *ngFor="let menu of menus">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon>{{ menu.icon }}</mat-icon>
+              <span>
+                {{ menu.label }}
+              </span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option
+              *ngFor="let subMenu of menu.subMenus"
+              [routerLink]="[subMenu.routerLink]"
+            >
+              {{ subMenu.label }}
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<div *ngIf="isLoginPage()">
+  <router-outlet></router-outlet>
+</div>

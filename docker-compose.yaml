@@ -1,0 +1,65 @@
+version: "3"
+services:
+
+  mic_api:
+    build: ./mic
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+    volumes:
+      - /home/$USER/.ssh:/root/.ssh
+      - ./mic:/var/www/html/project
+    depends_on:
+      - redis_mic
+    restart: always
+    container_name: mic
+    networks:
+      micnetwork:
+        ipv4_address: 173.23.0.3
+
+  mic_front:
+    build: ./mic-front
+    ports:
+      - "4201:4200"
+    stdin_open: true
+    tty: true
+    volumes:
+      - /home/$USER/.ssh:/root/.ssh
+      - ./mic-front:/var/www/html/project
+    restart: always
+    container_name: mic_front
+    networks:
+      micnetwork:
+        ipv4_address: 173.23.0.4
+
+  micdb:
+    image: "mysql:8.0.26"
+    restart: always
+    container_name: micdb
+    command: --sql_mode="NO_ENGINE_SUBSTITUTION"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3310:3306"
+    volumes:
+      - /srv/mic/data:/var/lib/mysql
+    networks:
+      micnetwork:
+        ipv4_address: 173.23.0.5
+
+  redis_mic:
+    image: "redis:alpine"
+    restart: always
+    container_name: redis_mic
+    networks:
+      micnetwork:
+        ipv4_address: 173.23.0.6
+
+networks:
+  micnetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 173.23.0.0/24
