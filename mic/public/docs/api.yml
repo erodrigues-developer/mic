@@ -1,0 +1,1260 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: "MIC API"
+paths:
+  /login:
+    post:
+      summary: Realiza o login do usuário
+      description: Endpoint para realizar o login do usuário.
+      tags:
+        - Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  token:
+                    type: string
+                  info:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          role_id:
+                            type: integer
+                          name:
+                            type: string
+                          email:
+                            type: string
+                          email_verified_at:
+                            type: string
+                          created_at:
+                            type: string
+                          updated_at:
+                            type: string
+                          role:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              role:
+                                type: string
+                              created_at:
+                                type: string
+                              updated_at:
+                                type: string
+                              permissions:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                    permission:
+                                      type: string
+                                    created_at:
+                                      type: string
+                                    updated_at:
+                                      type: string
+                                    pivot:
+                                      type: object
+                                      properties:
+                                        role_id:
+                                          type: integer
+                                        permission_id:
+                                          type: integer
+  /associates:
+    post:
+      tags:
+        - Associados
+      summary: Criar novo associado
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+                name:
+                  type: string
+                document:
+                  type: string
+                card_number:
+                  type: string
+                gender:
+                  type: string
+                birthdate:
+                  type: string
+                  format: date
+                cellphone_number:
+                  type: string
+                phone_number:
+                  type: string
+                marital_status:
+                  type: string
+                zip_code:
+                  type: string
+                street:
+                  type: string
+                number:
+                  type: string
+                complement:
+                  type: string
+                neighborhood:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+              required:
+                - active
+                - name
+                - document
+                - gender
+                - birthdate
+                - cellphone_number
+                - marital_status
+                - zip_code
+                - street
+                - number
+                - neighborhood
+                - city
+                - state
+      responses:
+        '201':
+          description: Associado criado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      active:
+                        type: boolean
+                        example: true
+                      name:
+                        type: string
+                        example: "Willer Almeida"
+                      document:
+                        type: string
+                        example: "37283025626"
+                      card_number:
+                        type: string
+                        example: null
+                      gender:
+                        type: string
+                        example: "M"
+                      birthdate:
+                        type: string
+                        format: date
+                        example: "1994-01-22"
+                      cellphone_number:
+                        type: string
+                        example: "+5531992716979"
+                      phone_number:
+                        type: string
+                        example: null
+                      marital_status:
+                        type: string
+                        example: "married"
+                      zip_code:
+                        type: string
+                        example: "32341-240"
+                      street:
+                        type: string
+                        example: "Rua Ipuera"
+                      number:
+                        type: string
+                        example: "248"
+                      complement:
+                        type: string
+                        example: "Apto 202"
+                      neighborhood:
+                        type: string
+                        example: "Novo Eldorado"
+                      city:
+                        type: string
+                        example: "Contagem"
+                      state:
+                        type: string
+                        example: "Minas Gerais"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2023-02-21T13:09:54.000000Z"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2023-02-21T13:09:54.000000Z"
+    get:
+      tags:
+        - Associados
+      summary: Retorna a lista de associados cadastrados no sistema.
+      description: Retorna a lista de associados cadastrados no sistema.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indicates if the request was successful.
+                  current_page:
+                    type: integer
+                    description: The current page number.
+                  per_page:
+                    type: integer
+                    description: The number of items per page.
+                  total:
+                    type: integer
+                    description: The total number of items.
+                  last_page:
+                    type: integer
+                    description: The last page number.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: The associate ID.
+                        active:
+                          type: integer
+                          description: Indicates if the associate is active.
+                        name:
+                          type: string
+                          description: The associate name.
+                        document:
+                          type: string
+                          description: The associate document number.
+                        card_number:
+                          type: string
+                          description: The associate card number.
+                        gender:
+                          type: string
+                          description: The associate gender.
+                        birthdate:
+                          type: string
+                          description: The associate birthdate.
+                        cellphone_number:
+                          type: string
+                          description: The associate cellphone number.
+                        phone_number:
+                          type: string
+                          description: The associate phone number.
+                        marital_status:
+                          type: string
+                          description: The associate marital status.
+                        zip_code:
+                          type: string
+                          description: The associate zip code.
+                        street:
+                          type: string
+                          description: The associate street.
+                        number:
+                          type: string
+                          description: The associate street number.
+                        complement:
+                          type: string
+                          description: The associate address complement.
+                        neighborhood:
+                          type: string
+                          description: The associate neighborhood.
+                        city:
+                          type: string
+                          description: The associate city.
+                        state:
+                          type: string
+                          description: The associate state.
+                        created_at:
+                          type: string
+                          description: The date and time when the associate was created.
+                        updated_at:
+                          type: string
+                          description: The date and time when the associate was last updated.
+              examples:
+                example1:
+                  value:
+                    success: true
+                    current_page: 1
+                    per_page: 10
+                    total: 20
+                    last_page: 2
+                    data:
+                      - id: 1
+                        active: 1
+                        name: John Doe
+                        document: 12345678901
+                        card_number: 9876543210
+                        gender: M
+                        birthdate: '1990-01-01'
+                        cellphone_number: '999999999'
+                        phone_number: null
+                        marital_status: single
+                        zip_code: '12345678'
+                        street: Main St.
+                        number: '123'
+                        complement: null
+                        neighborhood: Downtown
+                        city: Anytown
+                        state: ST
+                        created_at: '2022-02-21T15:00:00Z'
+                        updated_at: '2022-02-21T15:01:00Z'
+                      - id: 2
+                        active: 0
+                        name: Jane Doe
+  /associates/{id}:
+    get:
+      tags:
+        - Associados
+      summary: Obtém as informações de um associado pelo ID
+      description: Retorna as informações do associado correspondente ao ID informado
+      parameters:
+        - name: id
+          in: path
+          description: ID do associado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Sucesso ao obter as informações do associado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indica se a requisição foi bem sucedida
+                    example: true
+                  data:
+                    type: object
+                    description: Objeto com as informações do associado correspondente ao ID informado
+                    properties:
+                      id:
+                        type: integer
+                        description: ID do associado
+                        example: 1
+                      active:
+                        type: integer
+                        description: Indica se o associado está ativo ou inativo
+                        example: 1
+                      name:
+                        type: string
+                        description: Nome completo do associado
+                        example: Cristiano Ronaldo
+                      document:
+                        type: string
+                        description: Número do documento do associado
+                        example: '41845883101'
+                      card_number:
+                        type: string
+                        description: Número do cartão do associado
+                        example: '5005000505'
+                      gender:
+                        type: string
+                        description: Gênero do associado
+                        example: M
+                      birthdate:
+                        type: string
+                        description: Data de nascimento do associado
+                        example: '1985-10-10'
+                      cellphone_number:
+                        type: string
+                        description: Número de telefone celular do associado
+                        example: '31999889998'
+                      phone_number:
+                        type: string
+                        description: Número de telefone fixo do associado
+                        example: null
+                      marital_status:
+                        type: string
+                        description: Estado civil do associado
+                        example: married
+                      zip_code:
+                        type: string
+                        description: CEP do endereço do associado
+                        example: '32341240'
+                      street:
+                        type: string
+                        description: Nome da rua do endereço do associado
+                        example: Rua Ipuera
+                      number:
+                        type: string
+                        description: Número da residência do associado
+                        example: '5'
+                      complement:
+                        type: string
+                        description: Complemento do endereço do associado
+                        example: null
+                      neighborhood:
+                        type: string
+                        description: Bairro do endereço do associado
+                        example: Novo Eldorado
+                      city:
+                        type: string
+                        description: Cidade do endereço do associado
+                        example: Contagem
+                      state:
+                        type: string
+                        description: Estado do endereço do associado
+                        example: Minas Gerais
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Data de criação do registro do associado
+    put:
+      tags:
+        - Associados
+      summary: Atualiza as informações de um associado pelo ID
+      description: Atualiza as informações do associado correspondente ao ID informado
+      parameters:
+        - name: id
+          in: path
+          description: ID do associado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+                name:
+                  type: string
+                document:
+                  type: string
+                card_number:
+                  type: string
+                gender:
+                  type: string
+                birthdate:
+                  type: string
+                  format: date
+                cellphone_number:
+                  type: string
+                phone_number:
+                  type: string
+                marital_status:
+                  type: string
+                zip_code:
+                  type: string
+                street:
+                  type: string
+                number:
+                  type: string
+                complement:
+                  type: string
+                neighborhood:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+              required:
+                - active
+                - name
+                - document
+                - gender
+                - birthdate
+                - cellphone_number
+                - marital_status
+                - zip_code
+                - street
+                - number
+                - neighborhood
+                - city
+                - state
+      responses:
+        '200':
+          description: Sucesso ao atualizar as informações do associado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indica se a requisição foi bem sucedida
+                    example: true
+                  data:
+                    type: object
+                    description: Objeto com as informações atualizadas do associado correspondente ao ID informado
+                    properties:
+                      active:
+                        type: boolean
+                        description: Indica se o associado está ativo ou inativo
+                        example: true
+                      name:
+                        type: string
+                        description: Nome completo do associado
+                        example: Willer Almeida
+                      document:
+                        type: string
+                        description: Número do documento do associado
+                        example: '37283025626'
+                      card_number:
+                        type: string
+                        description: Número do cartão do associado
+                        example: null
+                      gender:
+                        type: string
+                        description: Gênero do associado
+                        example: M
+                      birthdate:
+                          type: string
+                          description: Data de nascimento do associado no formato AAAA-MM-DD.
+                          example: '1994-01-22'
+                      cellphone_number:
+                        type: string
+                        description: Número de telefone celular do associado.
+                        example: '+5531992716979'
+                      phone_number:
+                        type: string
+                        description: Número de telefone fixo do associado.
+                        example: null
+                      marital_status:
+                        type: string
+                        description: Estado civil do associado.
+                        example: married
+                      zip_code:
+                        type: string
+                        description: CEP do endereço do associado.
+                        example: '32341-240'
+                      street:
+                        type: string
+                        description: Nome da rua do endereço do associado.
+                        example: Rua Ipuera
+                      number:
+                        type: string
+                        description: Número da residência do associado.
+                        example: 5
+                      complement:
+                        type: string
+                        description: Complemento do endereço do associado.
+                        example: null
+                      neighborhood:
+                        type: string
+                        description: Bairro do endereço do associado.
+                        example: Novo Eldorado
+                      city:
+                        type: string
+                        description: Cidade do endereço do associado.
+                        example: Contagem
+                      state:
+                        type: string
+                        description: Estado do endereço do associado.
+                        example: Minas Gerais
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Data de criação do registro do associado.
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Data de atualização do registro do associado.
+    delete:
+      tags:
+        - Associados
+      summary: Exclui um associado pelo ID
+      description: Exclui um associado pelo ID informado
+      parameters:
+        - name: id
+          in: path
+          description: ID do associado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Exclusão bem sucedida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indica se a requisição foi bem sucedida
+                    example: true
+  
+  /providers:
+    post:
+      summary: Cria um novo prestador.
+      description: Cria um novo prestador com as informações fornecidas.
+      tags:
+        - Prestadores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+                  description: Indica se o prestador está ativo ou inativo.
+                  example: true
+                name:
+                  type: string
+                  description: Nome completo do prestador.
+                  example: Dr Grey
+                document:
+                  type: string
+                  description: Número do documento do prestador.
+                  example: "00007074654"
+                gender:
+                  type: string
+                  description: Gênero do prestador.
+                  example: F
+                birthdate:
+                  type: string
+                  format: date
+                  description: Data de nascimento do prestador.
+                  example: "1992-10-10"
+                service_location:
+                  type: string
+                  description: Local onde o prestador presta serviços.
+                  example: Hospital Albert Einstein
+                specialty:
+                  type: string
+                  description: Especialidade do prestador.
+                  example: Pediatria
+                cellphone_number:
+                  type: string
+                  description: Número de telefone celular do prestador.
+                  example: 31998877777
+                marital_status:
+                  type: string
+                  description: Estado civil do prestador.
+                  example: single
+                zip_code:
+                  type: string
+                  description: CEP do endereço do prestador.
+                  example: "59129790"
+                street:
+                  type: string
+                  description: Nome da rua do endereço do prestador.
+                  example: Rua Luiz Moura
+                number:
+                  type: string
+                  description: Número da residência do prestador.
+                  example: "55"
+                complement:
+                  type: string
+                  description: Complemento do endereço do prestador.
+                  example: null
+                neighborhood:
+                  type: string
+                  description: Bairro do endereço do prestador.
+                  example: Lagoa Azul
+                city:
+                  type: string
+                  description: Cidade do endereço do prestador.
+                  example: Natal
+                state:
+                  type: string
+                  description: Estado do endereço do prestador.
+                  example: Rio Grande do Norte
+            example:
+              active: true
+              name: Dr Grey
+              document: "00007074654"
+              gender: F
+              birthdate: "1992-10-10"
+              service_location: Hospital Albert Einstein
+              specialty: Pediatria
+              cellphone_number: 31998877777
+              marital_status: single
+              zip_code: "59129790"
+              street: Rua Luiz Moura
+              number: "55"
+              complement: null
+              neighborhood: Lagoa Azul
+              city: Natal
+              state: Rio Grande do Norte
+      responses:
+        '201':
+          description: Prestador criado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indica se a requisição foi bem-sucedida.
+                    example: true
+                  data:
+                    type: object
+                    description: Objeto com as informações do prestador criado.
+                    properties:
+                      id:
+                        type: integer
+                        description: ID do prestador
+                        example: 1
+                      active:
+                        type: boolean
+                        description: Indica se o prestador está ativo ou inativo.
+                        example: true
+                      name:
+                        type: string
+                        description: Nome completo do prestador.
+                        example: Dr Grey
+                      document:
+                        type: string
+                        description: Número do documento do prestador.
+                        example: "00007074654"
+                      gender:
+                        type: string
+                        description: Gênero do prestador.
+                        example: F
+                      birthdate:
+                        type: string
+                        format: date
+                        description: Data de nascimento do prestador.
+                        example: "1992-10-10"
+                      service_location:
+                        type: string
+                        description: Local onde o prestador presta serviços.
+                        example: Hospital Albert Einstein
+                      specialty:
+                        type: string
+                        description: Especialidade do prestador.
+                        example: Pediatria
+                      cellphone_number:
+                        type: string
+                        description: Número de telefone celular do prestador.
+                        example: 31998877777
+                      marital_status:
+                        type: string
+                        description: Estado civil do prestador.
+                        example: single
+                      zip_code:
+                        type: string
+                        description: CEP do endereço do prestador.
+                        example: "59129790"
+                      street:
+                        type: string
+                        description: Nome da rua do endereço do prestador.
+                        example: Rua Luiz Moura
+                      number:
+                        type: string
+                        description: Número da residência do prestador.
+                        example: "55"
+                      complement:
+                        type: string
+                        description: Complemento do endereço do prestador.
+                        example: null
+                      neighborhood:
+                        type: string
+                        description: Bairro do endereço do prestador.
+                        example: Lagoa Azul
+                      city:
+                        type: string
+                        description: Cidade do endereço do prestador.
+                        example: Natal
+                      state:
+                        type: string
+                        description: Estado do endereço do prestador.
+                        example: Rio Grande do Norte
+                      created_at:
+                          type: string
+                          format: date-time
+                          description: Data de criação do registro do prestador.
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Data de atualização do registro do prestador.
+  
+    get:
+      tags:
+        - Prestadores
+      summary: Retorna a lista de prestadores cadastrados no sistema.
+      description: Retorna a lista de prestadores cadastrados no sistema.
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indica se a requisição foi bem sucedida
+                    example: true
+                  current_page:
+                    type: integer
+                    description: Número da página atual
+                    example: 0
+                  per_page:
+                    type: integer
+                    description: Número de itens por página
+                    example: 10
+                  total:
+                    type: integer
+                    description: Número total de prestadores
+                    example: 1
+                  last_page:
+                    type: integer
+                    description: Número da última página
+                    example: 1
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: ID do prestador
+                          example: 1
+                        active:
+                          type: integer
+                          description: Indica se o prestador está ativo ou inativo
+                          example: 1
+                        name:
+                          type: string
+                          description: Nome completo do prestador
+                          example: Dr Marcos
+                        document:
+                          type: string
+                          description: Número do documento do prestador
+                          example: 23604615593
+                        gender:
+                          type: string
+                          description: Gênero do prestador
+                          example: M
+                        birthdate:
+                          type: string
+                          format: date
+                          description: Data de nascimento do prestador
+                          example: '1981-10-10'
+                        service_location:
+                          type: string
+                          description: Localização do serviço do prestador
+                          example: Unimed Santa Efigênia
+                        specialty:
+                          type: string
+                          description: Especialidade do prestador
+                          example: Cardiologia
+                        cellphone_number:
+                          type: string
+                          description: Número de telefone celular do prestador
+                          example: 31999889889
+                        phone_number:
+                          type: string
+                          description: Número de telefone fixo do prestador
+                          example: null
+                        marital_status:
+                          type: string
+                          description: Estado civil do prestador
+                          example: married
+                        zip_code:
+                          type: string
+                          description: CEP do endereço do prestador
+                          example: 32050330
+                        street:
+                          type: string
+                          description: Nome da rua do endereço do prestador
+                          example: Rua VL - 3
+                        number:
+                          type: string
+                          description: Número da residência do prestador
+                          example: 111
+                        complement:
+                          type: string
+                          description: Complemento do endereço do prestador
+                          example: null
+                        neighborhood:
+                          type: string
+                          description: Bairro do endereço do prestador
+                          example: Nova Contagem
+                        city:
+                          type: string
+                          description: Cidade do endereço do prestador
+                          example: Contagem
+                        state:
+                          type: string
+                          description: Estado do endereço do prestador.
+                          example: Minas Gerais
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Data de criação do registro do prestador.
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Data de atualização do registro do prestador.
+  /providers/{id}:
+    get:
+      tags:
+        - Prestadores
+      summary: Obtém as informações de um prestador pelo ID
+      description: Obtém as informações de um prestador cadastrado no sistema
+      parameters:
+        - name: id
+          in: path
+          description: ID do prestador
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indica se a requisição foi bem sucedida
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID do prestador
+                        example: 1
+                      active:
+                        type: integer
+                        description: Indica se o prestador está ativo ou inativo
+                        example: 1
+                      name:
+                        type: string
+                        description: Nome completo do prestador
+                        example: Dr Marcos
+                      document:
+                        type: string
+                        description: Número do documento do prestador
+                        example: 23604615593
+                      gender:
+                        type: string
+                        description: Gênero do prestador
+                        example: M
+                      birthdate:
+                        type: string
+                        format: date
+                        description: Data de nascimento do prestador
+                        example: '1981-10-10'
+                      service_location:
+                        type: string
+                        description: Localização do serviço do prestador
+                        example: Unimed Santa Efigênia
+                      specialty:
+                        type: string
+                        description: Especialidade do prestador
+                        example: Cardiologia
+                      cellphone_number:
+                        type: string
+                        description: Número de telefone celular do prestador
+                        example: 31999889889
+                      phone_number:
+                        type: string
+                        description: Número de telefone fixo do prestador
+                        example: null
+                      marital_status:
+                        type: string
+                        description: Estado civil do prestador
+                        example: married
+                      zip_code:
+                        type: string
+                        description: CEP do endereço do prestador
+                        example: 32050330
+                      street:
+                        type: string
+                        description: Nome da rua do endereço do prestador
+                        example: Rua VL - 3
+                      number:
+                        type: string
+                        description: Número da residência do prestador
+                        example: 111
+                      complement:
+                        type: string
+                        description: Complemento do endereço do prestador
+                        example: null
+                      neighborhood:
+                        type: string
+                        description: Bairro do endereço do prestador
+                        example: Nova Contagem
+                      city:
+                        type: string
+                        description: Cidade do endereço do prestador
+                        example: Contagem
+                      state:
+                        type: string
+                        description: Estado do endereço do prestador.
+                        example: Minas Gerais
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Data de criação do registro do prestador.
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Data de atualização do registro do prestador.
+    put:
+      tags:
+        - Prestadores
+      summary: Atualiza as informações de um prestador pelo ID
+      description: Atualiza as informações do prestador correspondente ao ID informado
+      parameters:
+        - name: id
+          in: path
+          description: ID do prestador
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+                  description: Indica se o prestador está ativo ou inativo.
+                  example: true
+                name:
+                  type: string
+                  description: Nome completo do prestador.
+                  example: Dr Grey
+                document:
+                  type: string
+                  description: Número do documento do prestador.
+                  example: "00007074654"
+                gender:
+                  type: string
+                  description: Gênero do prestador.
+                  example: F
+                birthdate:
+                  type: string
+                  format: date
+                  description: Data de nascimento do prestador.
+                  example: "1992-10-10"
+                service_location:
+                  type: string
+                  description: Local onde o prestador presta serviços.
+                  example: Hospital Albert Einstein
+                specialty:
+                  type: string
+                  description: Especialidade do prestador.
+                  example: Pediatria
+                cellphone_number:
+                  type: string
+                  description: Número de telefone celular do prestador.
+                  example: 31998877777
+                marital_status:
+                  type: string
+                  description: Estado civil do prestador.
+                  example: single
+                zip_code:
+                  type: string
+                  description: CEP do endereço do prestador.
+                  example: "59129790"
+                street:
+                  type: string
+                  description: Nome da rua do endereço do prestador.
+                  example: Rua Luiz Moura
+                number:
+                  type: string
+                  description: Número da residência do prestador.
+                  example: "55"
+                complement:
+                  type: string
+                  description: Complemento do endereço do prestador.
+                  example: null
+                neighborhood:
+                  type: string
+                  description: Bairro do endereço do prestador.
+                  example: Lagoa Azul
+                city:
+                  type: string
+                  description: Cidade do endereço do prestador.
+                  example: Natal
+                state:
+                  type: string
+                  description: Estado do endereço do prestador.
+                  example: Rio Grande do Norte
+            example:
+              active: true
+              name: Dr Grey
+              document: "00007074654"
+              gender: F
+              birthdate: "1992-10-10"
+              service_location: Hospital Albert Einstein
+              specialty: Pediatria
+              cellphone_number: 31998877777
+              marital_status: single
+              zip_code: "59129790"
+              street: Rua Luiz Moura
+              number: "55"
+              complement: null
+              neighborhood: Lagoa Azul
+              city: Natal
+              state: Rio Grande do Norte
+      responses:
+        '200':
+          description: Sucesso ao atualizar as informações do prestador
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indica se a requisição foi bem-sucedida.
+                    example: true
+                  data:
+                    type: object
+                    description: Objeto com as informações do prestador criado.
+                    properties:
+                      id:
+                        type: integer
+                        description: ID do prestador
+                        example: 1
+                      active:
+                        type: boolean
+                        description: Indica se o prestador está ativo ou inativo.
+                        example: true
+                      name:
+                        type: string
+                        description: Nome completo do prestador.
+                        example: Dr Grey
+                      document:
+                        type: string
+                        description: Número do documento do prestador.
+                        example: "00007074654"
+                      gender:
+                        type: string
+                        description: Gênero do prestador.
+                        example: F
+                      birthdate:
+                        type: string
+                        format: date
+                        description: Data de nascimento do prestador.
+                        example: "1992-10-10"
+                      service_location:
+                        type: string
+                        description: Local onde o prestador presta serviços.
+                        example: Hospital Albert Einstein
+                      specialty:
+                        type: string
+                        description: Especialidade do prestador.
+                        example: Pediatria
+                      cellphone_number:
+                        type: string
+                        description: Número de telefone celular do prestador.
+                        example: 31998877777
+                      marital_status:
+                        type: string
+                        description: Estado civil do prestador.
+                        example: single
+                      zip_code:
+                        type: string
+                        description: CEP do endereço do prestador.
+                        example: "59129790"
+                      street:
+                        type: string
+                        description: Nome da rua do endereço do prestador.
+                        example: Rua Luiz Moura
+                      number:
+                        type: string
+                        description: Número da residência do prestador.
+                        example: "55"
+                      complement:
+                        type: string
+                        description: Complemento do endereço do prestador.
+                        example: null
+                      neighborhood:
+                        type: string
+                        description: Bairro do endereço do prestador.
+                        example: Lagoa Azul
+                      city:
+                        type: string
+                        description: Cidade do endereço do prestador.
+                        example: Natal
+                      state:
+                        type: string
+                        description: Estado do endereço do prestador.
+                        example: Rio Grande do Norte
+                      created_at:
+                          type: string
+                          format: date-time
+                          description: Data de criação do registro do prestador.
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: Data de atualização do registro do prestador.
+    delete:
+      tags:
+        - Prestadores
+      summary: Exclui um prestador pelo ID
+      description: Exclui um prestador pelo ID informado
+      parameters:
+        - name: id
+          in: path
+          description: ID do prestador
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Exclusão bem sucedida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indica se a requisição foi bem sucedida
+                    example: true

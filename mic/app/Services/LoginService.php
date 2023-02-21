@@ -21,17 +21,18 @@ class LoginService
     {
         /** @var User */
         $user = User::where('email', $email)->first();
-        $permissions = $user->role->permissions->pluck('permission')->toArray();
-        $menus = array_unique(array_filter(array_map(function ($permission) {
-            return explode('-', $permission)[1] ?? null;
-        }, $permissions)));
-        $menus[] = 'all';
 
         if (!$user || !Hash::check($password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
+
+        $permissions = $user->role->permissions->pluck('permission')->toArray();
+        $menus = array_unique(array_filter(array_map(function ($permission) {
+            return explode('-', $permission)[1] ?? null;
+        }, $permissions)));
+        $menus[] = 'all';
 
         cache()->put("menu.user.$user->id", $menus);
         $token = $user->createToken(self::DEVICE_NAME, $permissions);
