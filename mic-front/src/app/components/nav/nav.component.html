@@ -14,7 +14,7 @@
     </mat-toolbar>
     <mat-nav-list>
       <mat-accordion multi>
-        <mat-expansion-panel *ngFor="let menu of menus">
+        <mat-expansion-panel *ngFor="let menu of getMenus()">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <mat-icon>{{ menu.icon }}</mat-icon>

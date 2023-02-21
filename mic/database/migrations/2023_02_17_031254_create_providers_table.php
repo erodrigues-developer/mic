@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('specialty');
             $table->string('cellphone_number');
             $table->string('phone_number')->nullable();
-            $table->enstringum('marital_status');
+            $table->string('marital_status');
             $table->string('zip_code');
             $table->string('street');
             $table->string('number');

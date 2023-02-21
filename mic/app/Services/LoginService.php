@@ -25,6 +25,7 @@ class LoginService
         $menus = array_unique(array_filter(array_map(function ($permission) {
             return explode('-', $permission)[1] ?? null;
         }, $permissions)));
+        $menus[] = 'all';
 
         if (!$user || !Hash::check($password, $user->password)) {
             throw ValidationException::withMessages([

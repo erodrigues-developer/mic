@@ -45,6 +45,8 @@ export class LoginComponent implements OnInit {
     this.service.login(this.email.value, this.password.value)
       .subscribe((data: Token) => {
         sessionStorage.setItem('token', data.token)
+        sessionStorage.setItem('user', JSON.stringify(data.info.user))
+        sessionStorage.setItem('menus', JSON.stringify(data.info.menus))
         location.assign('/')
         return
       }, (erro) => {

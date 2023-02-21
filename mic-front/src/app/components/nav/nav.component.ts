@@ -15,6 +15,7 @@ export class NavComponent {
     {
       label: 'Associados',
       icon: 'groups',
+      name: 'associates',
       subMenus: [
         {
           label: 'Associados',
@@ -25,6 +26,7 @@ export class NavComponent {
     {
       label: 'Prestadores',
       icon: 'medical_services',
+      name: 'providers',
       subMenus: [
         {
           label: 'Prestadores',
@@ -35,6 +37,7 @@ export class NavComponent {
     {
       label: 'Conta',
       icon: 'account_circle',
+      name: 'all',
       subMenus: [
         {
           label: 'Sair',
@@ -56,6 +59,11 @@ export class NavComponent {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  getMenus() {
+    const names = JSON.parse(sessionStorage.getItem('menus') ?? '[]')
+    return this.menus.filter(menu => names.includes(menu.name));
   }
 
   isLoginPage(): boolean {
