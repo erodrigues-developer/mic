@@ -9,6 +9,7 @@ import { STATUS_MESSAGE } from 'src/app/constants/httpErros';
 import { Provider } from 'src/app/interfaces/mic/provider/provider';
 import { ProviderItem } from 'src/app/interfaces/mic/provider/providerItem';
 import { ZipcodeItem } from 'src/app/interfaces/mic/zipcodeItem';
+import { CpfCnpjValidator } from 'src/app/rules/cpf.cnpj.validator';
 import { MessageService } from 'src/app/services/message.service';
 import { ProviderService } from 'src/app/services/provider.service';
 import { ZipCodeService } from 'src/app/services/zip-code.service';
@@ -53,6 +54,7 @@ export class FormProviderComponent extends BaseComponent implements OnInit {
   document = new FormControl('', [
     Validators.required,
     Validators.maxLength(255),
+    CpfCnpjValidator.isValid(),
   ])
 
   specialty = new FormControl('', [

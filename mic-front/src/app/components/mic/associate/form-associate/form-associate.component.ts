@@ -9,6 +9,7 @@ import { STATUS_MESSAGE } from 'src/app/constants/httpErros';
 import { Associate } from 'src/app/interfaces/mic/associate/associate';
 import { AssociateItem } from 'src/app/interfaces/mic/associate/associateItem';
 import { ZipcodeItem } from 'src/app/interfaces/mic/zipcodeItem';
+import { CpfCnpjValidator } from 'src/app/rules/cpf.cnpj.validator';
 import { AssociateService } from 'src/app/services/associate.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ZipCodeService } from 'src/app/services/zip-code.service';
@@ -52,6 +53,7 @@ export class FormAssociateComponent extends BaseComponent implements OnInit {
   document = new FormControl('', [
     Validators.required,
     Validators.maxLength(255),
+    CpfCnpjValidator.isValid(),
   ])
 
   birthdate = new FormControl('', [

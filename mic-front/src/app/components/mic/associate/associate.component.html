@@ -68,14 +68,14 @@
                 </button>
               </th>
               <td mat-cell *matCellDef="let element">
-                {{ element.document | mask: "CPF_CNPJ" }}
+                {{ element.document }}
               </td>
             </ng-container>
   
             <ng-container matColumnDef="cellphone_number">
               <th mat-header-cell *matHeaderCellDef>Celular</th>
               <td mat-cell *matCellDef="let element">
-                {{ element.cellphone_number | mask: "(00) 0 0000-0000" }}
+                {{ element.cellphone_number }}
               </td>
             </ng-container>
   
