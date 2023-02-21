@@ -26,6 +26,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/login', [LoginController::class, 'login']);
     
     Route::middleware('auth:sanctum')->group(function() {
+        Route::get('/info', [LoginController::class, 'info']);
         Route::post('/logout', [LoginController::class, 'logout']);
         
         Route::controller(AssociateController::class)->group(function () {

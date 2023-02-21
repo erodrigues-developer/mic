@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Laravel\Sanctum\NewAccessToken;
 
 class LoginService
 {
@@ -15,13 +15,16 @@ class LoginService
      * Login
      * @param string $email
      * @param string $password
-     * @return NewAccessToken
+     * @return array
      */
-    public function login(string $email, string $password): NewAccessToken
+    public function login(string $email, string $password): array
     {
         /** @var User */
         $user = User::where('email', $email)->first();
         $permissions = $user->role->permissions->pluck('permission')->toArray();
+        $menus = array_unique(array_filter(array_map(function ($permission) {
+            return explode('-', $permission)[1] ?? null;
+        }, $permissions)));
 
         if (!$user || !Hash::check($password, $user->password)) {
             throw ValidationException::withMessages([
@@ -29,7 +32,15 @@ class LoginService
             ]);
         }
 
-        return $user->createToken(self::DEVICE_NAME, $permissions);
+        cache()->put("menu.user.$user->id", $menus);
+        $token = $user->createToken(self::DEVICE_NAME, $permissions);
+        return [
+            'token' => $token->plainTextToken,
+            'info' => [
+                'user' => $user,
+                'menus' => cache()->get("menu.user.$user->id"),
+            ],
+        ];
     }
 
     /**
@@ -40,5 +51,18 @@ class LoginService
     public function logout(User $user): void
     {
         $user->tokens()->delete();
+    }
+
+    /**
+     * Get info
+     * @return array
+     */
+    public function info(): array
+    {
+        $user = Auth::user();
+        return [
+            'user' => $user,
+            'menus' => cache()->get("menu.user.$user->id")
+        ];
     }
 }

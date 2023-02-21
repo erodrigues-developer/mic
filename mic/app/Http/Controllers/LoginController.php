@@ -21,10 +21,22 @@ class LoginController
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        $token = $this->service->login($request->get('email'), $request->get('password'));
+        $loginData = $this->service->login($request->get('email'), $request->get('password'));
         return response()->json([
             'success' => true,
-            'token' => $token->plainTextToken,
+            ...$loginData,
+        ]);
+    }
+
+    /**
+     * Info
+     * @return JsonResponse
+     */
+    public function info(): JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            'info' => $this->service->info(),
         ]);
     }
 

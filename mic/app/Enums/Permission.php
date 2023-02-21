@@ -29,6 +29,10 @@ enum Permission: string
         return $combinacoes;
     }
 
+    /**
+     * Actions
+     * @return array
+     */
     public static function actions(): array
     {
         return [
